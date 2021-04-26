@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Layout from '../core/Layout';
 import { signin, authenticate, isAuthenticated } from "../auth";
+import { computeHeadingLevel } from '@testing-library/dom';
 
 
 const Signin = () => {
@@ -75,6 +76,9 @@ const Signin = () => {
             } else {
                 return <Redirect to="/user/dashboard" />;
             }
+        }
+        if (isAuthenticated()) {
+            return <Redirect to="/" />
         }
     }
     return (
