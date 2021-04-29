@@ -9,7 +9,7 @@ const Signin = () => {
     const [values, setValues] = useState({
         email: 'ps102646@gmail.com',
         password: 'ps102640',
-        error: '',
+        error: "",
         loading: false,
         redirectToReferrer: false
     })
@@ -57,7 +57,7 @@ const Signin = () => {
     )
 
     const showError = () => (
-        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+        <div className="alert alert-danger" style={{ display: error ? "" : 'none' }}>
             {error}
         </div>
     )
