@@ -44,11 +44,13 @@ const Shop = () => {
         const data = prices
         let array = []
 
-        for (let key in data) {
-            if (data[key]._id === parseInt(value)) {
-                array = data[key].array
-            }
-        }
+        const obj = data.find(item => item._id === parseInt(value))
+        array = data[obj._id].array
+        // for (let key in data) {
+        //     if (data[key]._id === parseInt(value)) {
+        //         array = data[key].array
+        //     }
+        // }
         return array;
     }
 
