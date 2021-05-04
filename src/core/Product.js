@@ -9,6 +9,7 @@ const Porduct = (props) => {
 
     const loadSingleProduct = productId => {
         read(productId).then(data => {
+            console.log(data)
             if (data.error) {
                 setError(data.error);
             } else {
@@ -23,12 +24,9 @@ const Porduct = (props) => {
     }, [])
 
     return (
-        <Layout title="Home Page" description="React" className="container-fluid">
-            <h2 className="mb-4">
-                Single Product
-            </h2>
+        <Layout title={product && product.name} description={product && product.description && product.description.substring(0, 100)} className="container-fluid">
             <div className="row">
-                {JSON.stringify(product)}
+                {product && product.description && <Card product={product} showViewProductButton={false} />}
             </div>
         </Layout>
     )
