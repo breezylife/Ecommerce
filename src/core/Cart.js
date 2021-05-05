@@ -8,12 +8,12 @@ const Cart = () => {
     const [items, setItems] = useState([])
     const [run, setRun] = useState(false);
 
-
     useEffect(() => {
         setItems(getCart())
     }, [run])
 
     const showItems = items => {
+        console.log(items)
         return (
             <div>
                 <h2>Your cart has {`${items.length}`} items</h2>
