@@ -8,7 +8,7 @@ import Card from './Card';
 import { isAuthenticated } from '../auth';
 
 
-const Checkout = ({ products }) => {
+const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     const [data, setData] = useState({
         loading: false,
         success: false,
@@ -78,11 +78,10 @@ const Checkout = ({ products }) => {
                         // console.log(response)
                         setData({ ...data, success: response.success });
                         // empty cart
-                        emptyCart(() => {
-                            setData({ loading: false })
-                            console.log('payment success and empty cart')
-                        })
-                        console.log(response)
+                        // emptyCart(() => {
+                        //     setData({ loading: false })
+                        //     console.log('payment success and empty cart')
+                        // })
                         // create order
                         const createOrderData = {
                             products: products,
@@ -91,6 +90,17 @@ const Checkout = ({ products }) => {
                             address: data.address
                         }
                         createOrder(userId, token, createOrderData)
+                            .then(response => {
+                                emptyCart(() => {
+                                    setRun(!run); // run useEffect in parent Cart
+                                    console.log('payment success and empty cart')
+                                    setData({ loading: false, success: true })
+                                })
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                setData({ loading: false })
+                            })
                     })
                     .catch(error => {
                         console.log(error)
