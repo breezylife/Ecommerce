@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DropIn from 'braintree-web-drop-in-react';
 import Layout from './Layout';
-import { getProducts, getBraintreeClientToken, processPayment } from './apiCore';
+import { getProducts, getBraintreeClientToken, processPayment, createOrder } from './apiCore';
 import { emptyCart } from './cartHelpers';
 import Card from './Card';
 import { isAuthenticated } from '../auth';
@@ -34,6 +34,10 @@ const Checkout = ({ products }) => {
     useEffect(() => {
         getToken(userId, token)
     }, [])
+
+    const handleAddress = event => {
+        setData({ ...data, address: event.target.value })
+    }
 
     const getTotal = () => {
         return products.reduce((currentValue, nextValue) => {
@@ -79,6 +83,13 @@ const Checkout = ({ products }) => {
                             console.log('payment success and empty cart')
                         })
                         // create order
+                        const createOrderData = {
+                            products: products,
+                            transaction_id: response.transaction_id,
+                            amount: response.transaction.amount,
+                            address: data.address
+                        }
+                        createOrder(userId, token, createOrderData)
                     })
                     .catch(error => {
                         console.log(error)
@@ -95,6 +106,15 @@ const Checkout = ({ products }) => {
         <div onBlur={() => setData({ ...data, error: "" })}>
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
+                    <div className="grom-group">
+                        <label className="text-muted">Delivery address:</label>
+                        <textarea
+                            className="form-control"
+                            value={data.address}
+                            placeholder="Type your delivery address here..."
+                            onChange={handleAddress}
+                        />
+                    </div>
                     <DropIn
                         options={{
                             authorization: data.clientToken,
