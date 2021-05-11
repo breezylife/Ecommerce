@@ -29,14 +29,14 @@ const Menu = ({ history }) => (
                     Cart <sup><small className="cart-badge">{itemTotal()}</small></sup>
                 </Link>
             </li>
-            {isAuthenticated() && isAuthenticated().user.role === 0 && (
+            {isAuthenticated() && isAuthenticated().user && isAuthenticated().user.role === 0 && (
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(history, "/user/dashboard")} to="/user/dashboard">
                         Dashboard
                     </Link>
                 </li>
             )}
-            {isAuthenticated() && isAuthenticated().user.role === 1 && (
+            {isAuthenticated() && isAuthenticated().user && isAuthenticated().user.role === 1 && (
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(history, "/admin/dashboard")} to="/admin/dashboard">
                         Dashboard

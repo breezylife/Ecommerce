@@ -18,7 +18,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         address: ''
     })
 
-    const userId = isAuthenticated() && isAuthenticated().user._id
+    const userId = isAuthenticated() && isAuthenticated().user && isAuthenticated().user._id
     const token = isAuthenticated() && isAuthenticated().token
 
     const getToken = (userId, token) => {
