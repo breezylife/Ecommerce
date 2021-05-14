@@ -15,7 +15,7 @@ const UpdateProduct = ({ match }) => {
         quantity: "",
         photo: "",
         loading: false,
-        error: "",
+        error: false,
         createdProduct: "",
         redirectToProfile: false,
         formData: ""
@@ -93,7 +93,7 @@ const UpdateProduct = ({ match }) => {
                 if (data.error) {
                     setValues({ ...values, error: data.error })
                 } else {
-                    setValues({ ...values, name: "", description: "", photo: "", price: "", quantity: "", loading: false, createdProduct: data.name })
+                    setValues({ ...values, name: "", description: "", photo: "", price: "", quantity: "", loading: false, error: false, redirectToProfile: true, createdProduct: data.name })
                 }
             })
     }
