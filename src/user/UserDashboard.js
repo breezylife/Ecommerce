@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import Layout from '../core/Layout';
+import Layout from '../component/Layout';
 import { isAuthenticated } from '../auth';
 import { getPurchaseHistory } from './apiUser';
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        init(_id, token)
+        // init(_id, token)
     }, [])
 
     const userLinks = () => {

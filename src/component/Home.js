@@ -30,12 +30,12 @@ const Home = () => {
     }
 
     useEffect(() => {
-        loadProductsByArrival();
-        loadProductsBySell();
+        // loadProductsByArrival();
+        // loadProductsBySell();
     }, [])
 
     return (
-        <Layout title="Home Page" description="React" className="container-fluid">
+        <Layout>
             <Search />
             <h2 className="mb-4">New Arrivals</h2>
             <div className="row">
